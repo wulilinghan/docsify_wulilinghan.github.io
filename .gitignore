@@ -1,0 +1,6 @@
+.idea
+*.swp
+*.~vsd
+\#*\#
+*~
+.DS_Store

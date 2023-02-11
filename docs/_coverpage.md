@@ -1,9 +1,10 @@
-<!-- 封面配置文件（_coverpage.md） -->
+<!-- 一些描述 -->
+![logo](_media/site_logo.png ':no-zoom')
 
-![logo](_media/site_logo.png)
+# docsify template 
 
-<!--
-[![stars](https://badgen.net/github/stars/fuzhengwei/fuzhengwei.github.io?icon=github&color=4ab8a1)](https://github.com/fuzhengwei/fuzhengwei.github.io) [![forks](https://badgen.net/github/forks/fuzhengwei/fuzhengwei.github.io?icon=github&color=4ab8a1)](https://github.com/fuzhengwei/fuzhengwei.github.io) 
--->
+> docsify，快速搭建一个贼简单的所见即所得博客！
 
+[GitHub](<https://github.com/wulilh/wulilh.github.io>)
 [开始阅读](README.md)
+

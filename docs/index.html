@@ -2,118 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Guide </title>
+    <!-- 网站标题 -->
+    <title>docsify-template</title>
+    <!-- 网站icon -->
+    <link rel="icon" href="_media/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="description" content="Description">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- Theme 主题设置 [vue.css] [buble.css] [dark.css] [pure.css] -->
     <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <!-- Plugin gitalk -->
     <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?b3354307876925c625a24bb138d2177c";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
 </head>
 <body>
-<div id="app"></div>
-
-<!-- 定义加载时候的动作 -->
-<div id="app">正在努力加载中~</div>
-
-<!--插入“gitalk评论”模块-->
-<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
-<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script src="/assets/js/md5.js"></script>
-<script>
-    var gitalkConfig = new Gitalk({
-        clientID: '50fe5b34ba86d0335367',
-        clientSecret: '55d0bf339e80dd2fda1d1420f3e889114646eb85',
-        repo: 'blog-comments', //评论仓库
-        owner: 'wililh', //你的GitHub的登录名
-        admin: ["wililh"], //你的Github名字和其他管理员的名字
-        id:decodeURI(window.location.pathname),
-        distractionFreeMode: false
-    });
-</script>
-
+<!-- loading显示的文字 -->
+<div id="app">Loading...</div>
 <script>
     window.$docsify = {
-        // 项目名称
-        name: 'Docsify-Guide',
-        // 仓库地址，点击右上角的Github章鱼猫头像会跳转到此地址
-        repo: 'https://github.com/wulilh',
-        // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
-        loadSidebar: true,
-        // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
-        loadNavbar: true,
-        // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
+        // ************************* Configuration *************************
+        // https://docsify.js.org/#/zh-cn/configuration
+        // --> 首页 「README.md」
+        // homepage: 'https://raw.githubusercontent.com/ripperhe/docsify-template/master/README.md',
+        // 封面 「_coverpage.md」
         coverpage: true,
-        // 最大支持渲染的标题层级
-        maxLevel: 5,
-        // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
-        subMaxLevel: 4,
-        // 小屏设备下合并导航栏到侧边栏
+        // 侧边栏 [_sidebar.md]
+        loadSidebar: true,
+        // 说实话，没搞懂
+        maxLevel: 4,
+        // 设置侧边栏中，当前文章的最大目录层级；不设置，则不会显示当前文章目录
+        subMaxLevel: 2,
+        // 顶部导航栏 [_navbar.md]
+        loadNavbar: true,
         mergeNavbar: true,
+        // 404页面 「_404.md」
+        notFoundPage: true,
+
+        // 左侧logo
+        logo: '/_media/icon.svg',
+        // 文档标题，显示在侧边栏顶部
+        name: 'docsify-template',
+        // 仓库地址（设置之后，会在页面右上角渲染一个 GitHub Corner 挂件）
+        repo: 'wulilh/wulilh.github.io',
+        // 页面切换之后，自动跳转到顶部
         auto2top: true,
+        // 格式化
+        formatUpdated: '{MM}/{DD} {HH}:{mm}',
+
+        // ************************* Plugins *************************
+        // https://docsify.js.org/#/zh-cn/plugins
+        // 全文搜索 - Search
         search: {
             paths: 'auto',
             placeholder: '🔍 Type to search ',
             noData: '😞 No Results! ',
             depth: 6
         },
+        //文章底部显示“下一篇”和“上一篇”
         pagination: {
             previousText: 'PREVIOUS',
             nextText: 'NEXT',
             crossChapter: true
         },
         plugins: [
+            // Edit On Github
             function (hook, vm) {
-                hook.doneEach(function () {
-                    var label, domObj, main, divEle, gitalk;
-                    label = md5(decodeURI(vm.route.path.split("/").pop()));
-                    domObj = Docsify.dom;
-                    main = domObj.getNode("#main");
-
-                    Array.apply(
-                        null,
-                        document.querySelectorAll("div.gitalk-container")
-                    ).forEach(function (ele) {
-                        ele.remove();
-                    });
-
-                    divEle = domObj.create("div");
-                    divEle.id = "gitalk-container-" + label;
-                    divEle.className = "gitalk-container";
-                    divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
-                    domObj.appendTo(domObj.find(".content"), divEle);
-                    gitalk = new Gitalk(
-                        Object.assign(gitalkConfig, {id: !label ? "home" : label})
-                    );
-                    gitalk.render("gitalk-container-" + label);
-                });
-            }
+                hook.beforeEach(function (html) {
+                    var url = 'https://github.com/ripperhe/docsify-template/blob/master/' + vm.route.file
+                    var editHtml = '[:memo: Edit Document](' + url + ')\n\n'
+                    return editHtml
+                        + html
+                        + '\n\n----\n\n'
+                    // + '<a href="https://docsify.js.org" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">Powered by docsify</a>'
+                })
+            },
         ]
     }
 </script>
+<!-- docsify js -->
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 
-<!-- docsify的js依赖 -->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-<!-- emoji表情支持 -->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-<!-- 图片放大缩小支持 -->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-<!-- 搜索功能支持 -->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!--在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码-->
-<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-
-<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-<script src="/assets/js/docsify-pagination.min.js"></script>
-<script src="/assets/js/prism-bash.js"></script>
-<script src="/assets/js/prism-java.min.js"></script>
+<!-- ************************* Plugins ************************* -->
+<!-- 全文搜索 -->
+<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+<!-- 图片缩放 - Zoom image -->
+<script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+<!-- 点击代码块右上角复制代码 -->
+<script src="//unpkg.com/docsify-copy-code"></script>
+<!-- 文章底部显示“下一篇”和“上一篇” -->
+<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.js"></script>
+<!-- gitalk -->
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '50fe5b34ba86d0335367',
+        clientSecret: '13e23f3cf0b67f47ae85e67b71d9859ed7edb436',
+        repo: 'blog-comments',
+        owner: 'wulilh',
+        admin: ['wulilh'],
+        id: decodeURI(window.location.pathname),
+        distractionFreeMode: false // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+<!-- 代码高亮 prism -->
+<script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-powershell.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-objectivec.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-swift.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-ruby.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-sql.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-kotlin.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-python.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-php.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-vim.min.js"></script>
 </body>
 </html>
