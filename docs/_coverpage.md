@@ -1,3 +1,5 @@
+<!-- 封面配置文件（_coverpage.md） -->
+
 ![logo](_media/site_logo.png)
 
 <!--

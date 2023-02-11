@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> B0x0 </title>
+    <title> Guide </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="description" content="Description">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/vue.css">
-    <link rel="stylesheet" href="/assets/css/gitalk.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
     <script>
         var _hmt = _hmt || [];
         (function () {
@@ -21,23 +20,45 @@
 </head>
 <body>
 <div id="app"></div>
+
+<!-- 定义加载时候的动作 -->
+<div id="app">正在努力加载中~</div>
+
+<!--插入“gitalk评论”模块-->
+<script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="/assets/js/md5.js"></script>
 <script>
-    var gitalkConfig = {
-        clientID: 'f31dbffe04c3b6748860',
-        clientSecret: '2262dd7008e765cc75d973a3343da75884449a25',
-        repo: 'wulilinghan.github.io',
-        owner: '唐为之',
-        admin: ["唐为之"],
+    var gitalkConfig = new Gitalk({
+        clientID: '50fe5b34ba86d0335367',
+        clientSecret: '55d0bf339e80dd2fda1d1420f3e889114646eb85',
+        repo: 'wulilh.github.io', //评论仓库
+        owner: 'wililh', //GitHub 的登录名
+        admin: ["wililh"],
+        id:decodeURI(window.location.pathname),
         distractionFreeMode: false
-    };
+    });
+</script>
+
+<script>
     window.$docsify = {
-        name: '唐为之',
-        repo: 'https://github.com/wulilinghan/wulilinghan.github.io',
-        auto2top: true,
-        coverpage: true,
+        // 项目名称
+        name: 'Docsify-Guide',
+        // 仓库地址，点击右上角的Github章鱼猫头像会跳转到此地址
+        repo: 'https://github.com/wulilh',
+        // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
         loadSidebar: true,
-        maxLevel: 4,
-        subMaxLevel: 2,
+        // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
+        loadNavbar: true,
+        // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
+        coverpage: true,
+        // 最大支持渲染的标题层级
+        maxLevel: 5,
+        // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
+        subMaxLevel: 4,
+        // 小屏设备下合并导航栏到侧边栏
+        mergeNavbar: true,
+        auto2top: true,
         search: {
             paths: 'auto',
             placeholder: '🔍 Type to search ',
@@ -79,12 +100,19 @@
     }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-<script src="/assets/js/md5.js"></script>
-<script src="/assets/js/docsify.min.js"></script>
-<script src="/assets/js/gitalk.min.js"></script>
+<!-- docsify的js依赖 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<!-- emoji表情支持 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+<!-- 图片放大缩小支持 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<!-- 搜索功能支持 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<!--在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码-->
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
 <script src="/assets/js/docsify-pagination.min.js"></script>
-<script src="/assets/js/zoom-image.js"></script>
 <script src="/assets/js/prism-bash.js"></script>
 <script src="/assets/js/prism-java.min.js"></script>
 </body>

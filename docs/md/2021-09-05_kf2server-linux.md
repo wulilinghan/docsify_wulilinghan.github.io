@@ -1,4 +1,5 @@
 ---
+```xml
 title: '【教程】Linux系统下搭建KF2服务器'
 date: 2021-05-03 13:01:41
 tags: []
@@ -6,14 +7,15 @@ published: true
 hideInList: false
 feature: 
 isTop: false
+```
 ---
+```xml
 操作系统:：`CentOS 7.6 64bit`
 规格:：`2 核 4 GB`
 带宽:：`5 Mbit/s 带宽`
 操作账户：`root`
 存储空间：`需要至少23G的可用空间`
-
-@[TOC]
+```
 
 # 一、安装SteamCMD
 ## 1. 安装运行库
